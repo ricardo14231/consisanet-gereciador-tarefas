@@ -1,0 +1,63 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto; 
+}
+
+.mat-cell {
+  width: 2%;
+  padding: 10px 10px 0px 10px;
+  font-size: 9px;
+}
+
+.mat-header-cell {
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-group mat-form-field {
+  width: calc(25% - 20px);
+  padding: 2px 14px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.rounded-input {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+th {
+  background-color: #D1E6FF !important;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  font-weight: 900;
+  text-align-last: start !important;
+}
+
+.container .data-info {
+  text-align: center;
+  margin-top: 7%;
+  color: #4e4e4e;
+}
+
+.container .data-info {
+  text-align: center;
+  margin-top: 7%;
+  color: #4e4e4e;
+}
+
+table {
+  width: 100%;
+}

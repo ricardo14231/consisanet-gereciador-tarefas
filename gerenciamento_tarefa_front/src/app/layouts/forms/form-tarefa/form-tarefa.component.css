@@ -1,0 +1,76 @@
+.container-crud {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 700px;
+}
+
+.title-container-crud {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.new-item {
+  margin-left: 10px;
+}
+
+.input-nome-tarefa mat-form-field {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-nome-tarefa input {
+  width: 80%;
+}
+
+.mat-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.situacao-and-tarefa-principal .tarefa-principal {
+  width: 60%;
+}
+
+.data-tarefa, .situacao-and-tarefa-principal {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mat-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cancel {
+  background-color: #ff5722;
+  color: #fff;
+}
+
+.save {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+mat-label {
+  font-weight: bold;
+}
+
+mat-datepicker {
+  width: calc(50% - 10px);
+}
+
+.usuario-responsavel {
+  width: 100%;
+}

@@ -1,0 +1,79 @@
+<div class="container-crud">
+  <span class="title-container-crud">Tarefa</span>
+  <div class="btn-nav">
+    <button mat-raised-button color="primary" class="new-item" (click)="cancelForm()">
+      <img src="assets/images/crud/list.svg"> Lista
+    </button>
+  </div>
+
+  <fieldset>
+    <legend>{{ tarefaService.isEdit ? "Atualizar" : "Novo" }}</legend>
+    <form autocomplete="off" novalidate [formGroup]="tarefaForm" (ngSubmit)="onSave()">
+      <div class="input-nome-tarefa">
+        <mat-form-field>
+          <mat-label>Nome tarefa</mat-label>
+          <input type="text" matInput formControlName="nomeTarefa">
+          <mat-error *ngIf="tarefaForm.get('nomeTarefa')?.hasError('required')">Nome tarefa <strong>obrigatório</strong></mat-error>
+        </mat-form-field>
+      </div>
+    
+      <div class="situacao-and-tarefa-principal">
+        <mat-form-field appearance="fill" class="status-tarefa">
+          <mat-label>Status da tarefa:</mat-label>
+          <mat-select formControlName="situacaoTarefa">
+            <mat-option value="AGUARDANDO">AGUARDANDO</mat-option>
+            <mat-option value="INICIADA">INICIADA</mat-option>
+            <mat-option value="ENCERRADA">ENCERRADA</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="tarefa-principal">
+          <mat-label>Tarefa principal:</mat-label>
+          <mat-select formControlName="tarefaPrincipal" [compareWith]="compareUsuarioOrTarefa">
+            <mat-option></mat-option>
+            <mat-option [value]="tarefaPrincipal" *ngFor="let tarefaPrincipal of listTarefaPrincipal">
+              {{tarefaPrincipal.nomeTarefa}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    
+      <div class="data-tarefa">
+        <mat-form-field appearance="fill" class="data-inicio">
+          <mat-label>Data início:</mat-label>
+          <input matInput [matDatepicker]="dataInicioInput" formControlName="dataInicio">
+          <mat-datepicker-toggle matSuffix [for]="dataInicioInput"></mat-datepicker-toggle>
+          <mat-datepicker #dataInicioInput></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" class="data-fim">
+          <mat-label>Data fim:</mat-label>
+          <input matInput [matDatepicker]="dataFimInput" formControlName="dataFim">
+          <mat-datepicker-toggle matSuffix [for]="dataFimInput"></mat-datepicker-toggle>
+          <mat-datepicker #dataFimInput></mat-datepicker>
+          <mat-error *ngIf="tarefaForm.get('dataFim')?.hasError('pattern')">Formato de data inválido. <br> Use dd/MM/yyyy.</mat-error>
+          <mat-error *ngIf="tarefaForm.get('dataFim')?.hasError('required')">Campo obrigatório.</mat-error>
+        </mat-form-field>
+      </div>
+    
+      <mat-form-field appearance="fill" class="usuario-responsavel">
+        <mat-label>Usuário responsável:</mat-label>
+        <mat-select formControlName="usuarioResponsavel" [compareWith]="compareUsuarioOrTarefa">
+          <mat-option></mat-option>
+          <mat-option [value]="usuario" *ngFor="let usuario of listUsuarioTarefa">
+            {{usuario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <div class="btn-action-form">
+        <button mat-raised-button color="warn" type="reset" class="cancel" (click)="cancelForm()">
+          <img src="assets/images/crud/cancel.svg"> Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="save" [disabled]="tarefaForm.invalid">
+          <img src="assets/images/crud/save.svg"> Salvar
+        </button>
+      </div>
+    </form>
+  </fieldset>
+</div>

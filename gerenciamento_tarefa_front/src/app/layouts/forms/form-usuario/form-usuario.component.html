@@ -1,0 +1,30 @@
+<div class="container-crud">
+  <span class="title-container-crud">Usuário</span>
+  <div class="btn-nav">
+    <button mat-raised-button color="primary" class="new-item" (click)="cancelForm()">
+      <img src="assets/images/crud/list.svg"> Lista
+    </button>
+  </div>
+
+  <fieldset>
+    <legend>{{ usuarioService.isEdit ? "Atualizar" : "Novo" }}</legend>
+    <form autocomplete="off" novalidate [formGroup]="usuarioForm" (ngSubmit)="onSave()">
+      <div class="input-nome-usuario">
+        <mat-form-field>
+          <mat-label>Nome usuário</mat-label>
+          <input type="text" matInput formControlName="nome">
+          <mat-error *ngIf="usuarioForm.get('nome')?.hasError('required')">Nome usuário <strong>obrigatório</strong></mat-error>
+        </mat-form-field>
+      </div>
+        
+      <div class="btn-action-form">
+        <button mat-raised-button color="warn" type="reset" class="cancel" (click)="cancelForm()">
+          <img src="assets/images/crud/cancel.svg"> Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="save" [disabled]="usuarioForm.invalid">
+          <img src="assets/images/crud/save.svg"> Salvar
+        </button>
+      </div>
+    </form>
+  </fieldset>
+</div>

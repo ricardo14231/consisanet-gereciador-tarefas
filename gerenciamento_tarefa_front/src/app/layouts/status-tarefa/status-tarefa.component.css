@@ -1,0 +1,84 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.select-type-filter label{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.select-type-filter mat-radio-group {
+  margin-left: 30px;
+}
+
+.type-filter-radio-button {
+  margin-right: 10px;
+}
+
+.download-pdf {
+  margin-left: 50px;
+}
+
+.form-group-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: initial;
+  width: 100%;
+  padding: 10px 0px;
+  margin: 0 auto; 
+}
+
+.user {
+  width: 300px;
+}
+
+mat-form-field {
+  margin-right: 10px;
+}
+
+.mat-cell {
+  width: 2%;
+  padding: 10px 10px 0px 10px;
+  font-size: 9px;
+}
+
+.mat-header-cell {
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-group-filter .mat-form-field {
+  width: calc(25% - 20px);
+  padding: 2px 14px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.rounded-input {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+th {
+  background-color: #D1E6FF !important;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  font-weight: 900;
+  text-align-last: start !important;
+}
+
+.container .data-info {
+  text-align: center;
+  margin-top: 7%;
+  color: #4e4e4e;
+}
+
+table {
+  margin-top: 10px;
+  width: 100%;
+}

@@ -1,0 +1,148 @@
+<div class="container">
+  <fieldset>
+    <legend>Filtro</legend>
+    <div class="select-type-filter">
+      <label id="type-filter-label">Escolha o tipo de filtro:</label>
+      <mat-radio-group
+        aria-labelledby="type-filter-radio-group-label"
+        class="type-filter-radio-group"
+        [(ngModel)]="selectedFilterType"
+        name="type-filter"
+      >
+        <mat-radio-button
+          class="type-filter-radio-button"
+          *ngFor="let type of typeFilter.value; let i = index"
+          [value]="type"
+        >
+          {{ typeFilter.display[i] }}
+        </mat-radio-button>
+      </mat-radio-group>
+      
+      <button mat-raised-button color="primary" class="download-pdf"
+        (click)="download()">Download PDF</button>
+    </div>
+    
+    <section class="form-group-filter">
+
+      <mat-form-field appearance="fill" class="form-field-full-width" *ngIf="selectedFilterType === FILTRO_POR_DATA">
+        <mat-label>Data Início:</mat-label>
+        <input matInput [matDatepicker]="dataInicioInput" [(ngModel)]="dataInicio">
+        <mat-datepicker-toggle matSuffix [for]="dataInicioInput"></mat-datepicker-toggle>
+        <mat-datepicker #dataInicioInput></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field-full-width" 
+        *ngIf="selectedFilterType === FILTRO_POR_DATA">
+        <mat-label>Data fim:</mat-label>
+        <input matInput [matDatepicker]="dataFimInput" [(ngModel)]="dataFim">
+        <mat-datepicker-toggle matSuffix [for]="dataFimInput"></mat-datepicker-toggle>
+        <mat-datepicker #dataFimInput></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field-full-width user" 
+        *ngIf="selectedFilterType === FILTRO_POR_USUARIO">
+        <mat-label class="rounded-input">Usuário responsável:</mat-label>
+        <mat-select matNativeControl [(ngModel)]="usuarioTarefa" name="usuarioTarefa">
+          <mat-option></mat-option>
+          <mat-option [value]="usuario" *ngFor="let usuario of listUsuarioTarefa">
+            {{usuario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field-full-width" *ngIf="selectedFilterType === FILTRO_POR_USUARIO">
+        <mat-label class="rounded-input">Status da tarefa:</mat-label>
+        <mat-select matNativeControl [(ngModel)]="situacaoTarefa" name="situacaoTarefa">
+          <mat-option>None</mat-option>
+          <mat-option value="AGUARDANDO">AGUARDANDO</mat-option>
+          <mat-option value="INICIADA">INICIADA</mat-option>
+          <mat-option value="ENCERRADA">ENCERRADA</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary"
+        (click)="searchTarefa()" 
+        *ngIf="selectedFilterType !== FILTRO_POR_TAREFA_ATRASADA">Pesquisar</button>
+
+      <button mat-raised-button color="warn" 
+        (click)="searchTarefa()"
+        *ngIf="selectedFilterType === FILTRO_POR_TAREFA_ATRASADA">Tarefas atrassadas</button>
+
+    </section>
+  </fieldset>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- nomeTarefa Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome tarefa </th>
+      <td mat-cell *matCellDef="let element"> {{element.nomeTarefa}} </td>
+    </ng-container>
+
+    <!-- subTarefa Column -->
+    <ng-container matColumnDef="subTarefa">
+      <th mat-header-cell *matHeaderCellDef> Sub tarefa </th>
+      <td mat-cell *matCellDef="let element"> {{element.tarefaPrincipal?.nomeTarefa}} </td>
+    </ng-container>
+
+    <!-- dataInicio Column -->
+    <ng-container matColumnDef="dataInicio">
+      <th mat-header-cell *matHeaderCellDef> Data início </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataInicio}} </td>
+    </ng-container>
+
+    <!-- dataFim Column -->
+    <ng-container matColumnDef="dataFim">
+      <th mat-header-cell *matHeaderCellDef> Data fim </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataFim}} </td>
+    </ng-container>
+
+    <!-- situacaoTarefa Column -->
+    <ng-container matColumnDef="situacaoTarefa">
+      <th mat-header-cell *matHeaderCellDef> Situação tarefa </th>
+      <td mat-cell *matCellDef="let element"> {{element.situacaoTarefa}} </td>
+    </ng-container>
+
+    <!-- usuarioResponsavel.nome Column -->
+    <ng-container matColumnDef="responsavel">
+      <th mat-header-cell *matHeaderCellDef> Responsável </th>
+      <td mat-cell *matCellDef="let element"> {{element.usuarioResponsavel?.nome}} </td>
+    </ng-container>
+
+    <!-- updateAt Column -->
+    <ng-container matColumnDef="updateAt">
+      <th mat-header-cell *matHeaderCellDef> Atualizado </th>
+      <td mat-cell *matCellDef="let element"> {{formatDatePtBr(element?.updateAt)}} </td>
+    </ng-container>
+
+    <!-- createAt.nome Column -->
+    <ng-container matColumnDef="createAt">
+      <th mat-header-cell *matHeaderCellDef> Criado em</th>
+      <td mat-cell *matCellDef="let element"> {{formatDatePtBr(element.createAt)}} </td>
+    </ng-container>
+
+    <!-- ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <img src="assets/images/crud/edit.svg" class="img-edit" alt="Editar" title="Editar" (click)="editTarefa(element)">
+        <img src="assets/images/crud/delete.svg" class="img-delete" alt="Deletar" title="Deletar" (click)="deleteUsuario(element.id)">
+        
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div *ngIf="checkDataInfo && !reload" class="data-info">
+    <h3>Não há dados a serem exibidos</h3>
+  </div>
+
+</div>

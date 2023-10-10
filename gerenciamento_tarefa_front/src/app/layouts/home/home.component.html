@@ -1,0 +1,48 @@
+<div>
+  <mat-toolbar class="mat-elevation-z8">
+      <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+          <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+          <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+      </button>
+
+      <div class="title_page">
+          <p>Teste Tecnico: Ricardo Farias</p>
+      </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+      <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+          <img class="avatar" src="../../assets/images/consisasistemas_logo.svg" alt="Logo" />
+
+          <mat-divider></mat-divider>
+
+          <button mat-button class="menu-button" routerLink="/list-tarefa">
+              <mat-icon>manage_search</mat-icon>
+              <span>Status Tarefa</span>
+          </button>
+
+          <button mat-button class="menu-button" routerLink="/tarefa">
+              <mat-icon>task</mat-icon>
+              <span>Tarefa</span>
+          </button>
+
+          <button mat-button class="menu-button" routerLink="/list-usuario">
+            <mat-icon>list</mat-icon>
+            <span>Lista de usuário</span>
+        </button>
+
+          <button mat-button class="menu-button" routerLink="/usuario">
+              <mat-icon>manage_accounts</mat-icon>
+              <span>Contas de Usuário</span>
+          </button>
+          <mat-divider></mat-divider>
+
+      </mat-sidenav>
+      
+      <section>
+        <router-outlet></router-outlet>
+      </section>
+      
+  </mat-sidenav-container>
+
+</div>

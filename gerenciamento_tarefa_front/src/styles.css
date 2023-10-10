@@ -1,0 +1,157 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+fieldset {
+  border-radius: 4px;
+  border: solid 1px #c5c5c5;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+legend {
+  border: solid 1px #c5c5c5;
+  border-radius: 4px;
+  padding: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #f1f1f1;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+/*
+  CSS Mat-SnacBar
+*/
+.mat-snack-bar-container {
+  position: relative;
+  color: #f5f5f5;
+  top: 50px;
+  width: 350px;
+  word-break: break-word;
+}
+
+.mat-simple-snackbar-action button {
+  color: #f5f5f5;
+}
+
+/*
+  Container CRUD 
+*/
+.container-crud {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  background-color: #d1d1d1;
+}
+
+.container-crud fieldset {
+  clear: both;
+  position: relative;
+  top: 10px;
+  max-height: 90%;
+  overflow: auto;
+}
+
+/*
+  Span Título - Tela de CRUD
+*/
+.title-container-crud {
+  background-color: #f1f1f1;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  padding: 5px;
+  position: relative;
+  top: 5px;
+  border-radius: 4px;
+  float: left;
+}
+
+/*
+  Botões Editar, Deletar e Detalhes - Lista
+*/
+.img-edit, .img-delete {
+  cursor: pointer;
+}
+
+.img-edit:active, .img-delete:active {
+  opacity: 0.8;
+}
+
+.img-edit {
+  filter: invert(90%) sepia(52%) saturate(808%) hue-rotate(317deg) brightness(107%) contrast(101%);
+}
+
+.img-delete {
+  filter: invert(14%) sepia(85%) saturate(4921%) hue-rotate(356deg) brightness(86%) contrast(102%);
+}
+
+/*
+  Botões Novo, Lista e Atualizar - tela de CRUD
+*/
+.btn-nav .new-item {
+  float: right;
+}
+
+.btn-nav .new-item {
+  font-size: 16px;
+  width: 120px;
+}
+
+.btn-nav .new-item img {
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 22px;
+  transform: translateY(-2px);
+  filter: invert(99%) sepia(20%) saturate(45%) hue-rotate(306deg) brightness(116%) contrast(92%);
+}
+
+/*
+  Botões Cancela e Salvar - Tela create-update
+*/
+.btn-action-form {
+  margin-top: 20px;
+  float: right;
+}
+
+.btn-action-form button:first-child {
+  margin-right: 10px;
+}
+
+.btn-action-form button {
+  width: 140px;
+}
+
+.btn-action-form button:hover {
+  cursor: pointer;
+}
+
+.btn-action-form button img {
+  vertical-align: middle;
+  margin-right: 5px;
+  filter: invert(99%) sepia(20%) saturate(45%) hue-rotate(306deg) brightness(116%) contrast(92%);
+}
