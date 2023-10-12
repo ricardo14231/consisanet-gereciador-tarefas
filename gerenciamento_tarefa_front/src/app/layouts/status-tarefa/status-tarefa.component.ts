@@ -122,7 +122,7 @@ export class StatusTarefaComponent {
       next: responseUsuario => {
         this.listUsuarioTarefa = responseUsuario;
       },
-      error: () => this.toastrService.error("Erro ao listar os usuarios!", 'Delete')
+      error: (err) => this.toastrService.error("Erro ao listar os usuarios!", err.error.details ? err.error.details : "Listar")
     });
   }
 
@@ -133,7 +133,7 @@ export class StatusTarefaComponent {
         this.dataSource = new MatTableDataSource<Tarefa>(responseTarefa);
         this.dataSource.data.length === 0 ? this.checkDataInfo = true : this.checkDataInfo = false;
       },
-      error: () => this.toastrService.error("Erro ao listar as tarefas!", 'Listar')
+      error: (err) => this.toastrService.error("Erro ao listar as tarefas!", err.error.details ? err.error.details : "Listar")
     });
   }
 
@@ -142,14 +142,14 @@ export class StatusTarefaComponent {
     this.router.navigate(['tarefa']);
   }
 
-  deleteUsuario(tarefaId: number): void {
+  deleteTarefa(tarefaId: number): void {
 
     this.tarefaService.deleteTarefa(tarefaId).subscribe({
       next: () => {
         this.toastrService.success('Sucesso na operação!', 'Delete');
         this.listAllTarefa();
       },
-      error: err => this.toastrService.error('Erro ao deletar a tarefa', 'Delete')
+      error: err => this.toastrService.error('Erro ao deletar a tarefa', err.error.details ? err.error.details : "Delete")
     })
   }
 
@@ -158,7 +158,7 @@ export class StatusTarefaComponent {
       next: response => {
         this.setDataInDataSource(response);
       },
-      error: err => this.toastrService.error('Erro ao buscar tarefa por data', 'Erro consulta')
+      error: err => this.toastrService.error('Erro ao buscar tarefa por data', err.error.details ? err.error.details : "Consulta")
     })
   }
 
@@ -167,7 +167,7 @@ export class StatusTarefaComponent {
       next: response => {
         this.setDataInDataSource(response);
       },
-      error: err => this.toastrService.error('Erro ao buscar tarefa por data', 'Erro consulta')});
+      error: err => this.toastrService.error('Erro ao buscar tarefa por data', err.error.details ? err.error.details : "Consulta")});
   }
 
   private findTarefaPerUsuario(usuarioId: number)  {
@@ -175,7 +175,7 @@ export class StatusTarefaComponent {
       next: response => {
         this.setDataInDataSource(response);
       },
-      error: err => this.toastrService.error('Erro ao buscar tarefa por usuário', 'Erro consulta')});
+      error: err => this.toastrService.error('Erro ao buscar tarefa por usuário', err.error.details ? err.error.details : "Consulta")});
   }
 
   private findTarefaPerUsuarioAndSituacaoTarefa(usuarioId: number, situacao: situacaoTarefaEnum)  {
@@ -183,7 +183,7 @@ export class StatusTarefaComponent {
       next: response => {
         this.setDataInDataSource(response);
       },
-      error: err => this.toastrService.error('Erro ao buscar tarefa por usuário e situação', 'Erro consulta')});
+      error: err => this.toastrService.error('Erro ao buscar tarefa por usuário e situação', err.error.details ? err.error.details : "Consulta")});
   }
 
   private setDataInDataSource(response: Tarefa[]) {

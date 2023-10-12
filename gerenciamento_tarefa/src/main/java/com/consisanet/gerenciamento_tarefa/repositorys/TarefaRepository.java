@@ -21,11 +21,12 @@ public interface TarefaRepository extends JpaRepository<TarefaModel, Long> {
 
     List<TarefaModel> findByDeletadoFalseAndCreateAtBetween(LocalDateTime initialDate, LocalDateTime finalDate);
 
+    TarefaModel findByTarefaPrincipalId(Long id);
 
     @Query(value =
             "SELECT * FROM tarefa t " +
             "WHERE t.deletado = false " +
-            "AND t.situacao_tarefa != 'ENCERRADO' " +
+            "AND t.situacao_tarefa != 'ENCERRADA' " +
             "AND t.data_fim < ?1",
             nativeQuery = true
     )
@@ -34,6 +35,7 @@ public interface TarefaRepository extends JpaRepository<TarefaModel, Long> {
     @Query(value =
             "SELECT * FROM tarefa t " +
                     "WHERE t.deletado = false " +
+                    "AND t.situacaoTarefa != 'ENCERRADO'" +
                     "AND usuario_id = ?1 ",
             nativeQuery = true)
     List<TarefaModel> listTarefaByUsuario(Long usuarioId);

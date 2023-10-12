@@ -42,7 +42,7 @@ export class FormTarefaComponent {
 
     if (this.tarefaService.isEdit) {
       this.tarefa = this.tarefaService.tarefa;
-
+    
       this.tarefaForm.patchValue({
         nomeTarefa: this.tarefa.nomeTarefa,
         situacaoTarefa: this.tarefa.situacaoTarefa,
@@ -85,9 +85,9 @@ export class FormTarefaComponent {
       tarefaPrincipal: [this.listTarefaPrincipal]
     });
   }
-
+  
   onSave() {
-
+    
     this.captureFormData();
     this.tarefaService.onSave(this.tarefa);
 
@@ -98,7 +98,6 @@ export class FormTarefaComponent {
     }, (err) => {
       console.log(err)
       this.toastrService.error("Erro ao gravar a tarefa!", 'Cadastro');
-      this.router.navigate(['/list-tarefa']);
     })
   }
 
@@ -118,7 +117,7 @@ export class FormTarefaComponent {
     } else {
       this.tarefa.usuarioResponsavel = usuarioResponsavel;
     }
-
+  
     if(this.isTarefaVazia(tarefaPrincipal)) {
       delete this.tarefa.tarefaPrincipal;
     } else {

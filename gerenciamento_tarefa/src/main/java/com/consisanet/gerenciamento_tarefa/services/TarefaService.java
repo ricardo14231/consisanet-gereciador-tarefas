@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -89,11 +90,22 @@ public class TarefaService {
     public MessageResponseDto deleteTarefa(Long id) {
         TarefaModel tarefaToDelete = verifyIfExistsTarefa(id);
 
+        if(tarefaToDelete.getUsuarioResponsavel() != null) {
+            throw new ResponseUnprocessableException("Não é possível deletar uma tarefa com um usuário associado a ela!");
+        }
+
         List<TarefaModel> listTarefa = tarefaRepository.findByTarefaPrincipal(tarefaToDelete);
 
         listTarefa.forEach(t -> {
             t.setDeletado(true);
             t.setUpdateAt(LocalDateTime.now());
+            if(t.getTarefaPrincipal() != null) {
+                TarefaModel subTarefa = tarefaRepository.findByTarefaPrincipalId(t.getId());
+                subTarefa.setDeletado(true);
+                subTarefa.setUpdateAt(LocalDateTime.now());
+            }
+            t.getTarefaPrincipal().setDeletado(true);
+            t.getTarefaPrincipal().setUpdateAt(LocalDateTime.now());
         });
 
         tarefaRepository.saveAll(listTarefa);
