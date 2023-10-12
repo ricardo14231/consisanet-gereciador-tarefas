@@ -100,11 +100,7 @@ public class TarefaService {
             t.setDeletado(true);
             t.setUpdateAt(LocalDateTime.now());
             if(t.getTarefaPrincipal() != null) {
-                List<TarefaModel> subTarefa = tarefaRepository.findByTarefaPrincipalId(t.getId());
-                subTarefa.forEach(sub -> {
-                    sub.setDeletado(true);
-                    sub.setUpdateAt(LocalDateTime.now());
-                });
+                subTarefaDelete(t);
             }
             t.getTarefaPrincipal().setDeletado(true);
             t.getTarefaPrincipal().setUpdateAt(LocalDateTime.now());
@@ -118,6 +114,17 @@ public class TarefaService {
         tarefaRepository.save(tarefaToDelete);
 
         return new MessageResponseDto("Recurso com Id: " + id + " deletado");
+    }
+
+    private void subTarefaDelete(TarefaModel subTarefa) {
+        List<TarefaModel> sub = tarefaRepository.findByTarefaPrincipalId(subTarefa.getId());
+        sub.forEach(s -> {
+            s.setDeletado(true);
+            s.setUpdateAt(LocalDateTime.now());
+            if(s.getTarefaPrincipal() != null) {
+                subTarefaDelete(s);
+            }
+        });
     }
 
     private TarefaModel verifyIfExistsTarefa(Long id) {
