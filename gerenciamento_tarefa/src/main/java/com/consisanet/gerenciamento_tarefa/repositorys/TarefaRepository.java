@@ -21,7 +21,7 @@ public interface TarefaRepository extends JpaRepository<TarefaModel, Long> {
 
     List<TarefaModel> findByDeletadoFalseAndCreateAtBetween(LocalDateTime initialDate, LocalDateTime finalDate);
 
-    TarefaModel findByTarefaPrincipalId(Long id);
+    List<TarefaModel> findByTarefaPrincipalId(Long id);
 
     @Query(value =
             "SELECT * FROM tarefa t " +

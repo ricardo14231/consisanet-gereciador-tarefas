@@ -100,9 +100,11 @@ public class TarefaService {
             t.setDeletado(true);
             t.setUpdateAt(LocalDateTime.now());
             if(t.getTarefaPrincipal() != null) {
-                TarefaModel subTarefa = tarefaRepository.findByTarefaPrincipalId(t.getId());
-                subTarefa.setDeletado(true);
-                subTarefa.setUpdateAt(LocalDateTime.now());
+                List<TarefaModel> subTarefa = tarefaRepository.findByTarefaPrincipalId(t.getId());
+                subTarefa.forEach(sub -> {
+                    sub.setDeletado(true);
+                    sub.setUpdateAt(LocalDateTime.now());
+                });
             }
             t.getTarefaPrincipal().setDeletado(true);
             t.getTarefaPrincipal().setUpdateAt(LocalDateTime.now());
